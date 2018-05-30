@@ -8,6 +8,7 @@ import (
 	"os/signal"
 
 	"github.com/bwmarrin/discordgo"
+	"github.com/paul-io/xiv-bot/cmds"
 )
 
 type config struct {
@@ -28,8 +29,9 @@ func main() {
 	}
 	l.Println("Starting bot")
 
+	d.AddHandler(cmds.OnMessage)
 	if err = d.Open(); err != nil {
-		panic(err)
+		l.Panic(err)
 	}
 
 	l.Println("Bot is now running")
@@ -41,12 +43,12 @@ func main() {
 
 func init() {
 	l = log.New(os.Stderr, "main: ", log.LstdFlags|log.Lshortfile)
-	fileContents, err := ioutil.ReadFile("configuration/MainConfig.json")
+	fileContents, err := ioutil.ReadFile("resources/config/MainConfig.json")
 	if err != nil {
-		l.Panicln(err.Error())
+		l.Panic(err.Error())
 	}
 	err = json.Unmarshal(fileContents, &conf)
 	if err != nil {
-		l.Panicln(err.Error())
+		l.Panic(err.Error())
 	}
 }
