@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/json"
+	"fmt"
 	"io/ioutil"
 	"log"
 	"os"
@@ -30,6 +31,9 @@ func main() {
 	l.Println("Starting bot")
 
 	d.AddHandler(cmds.OnMessage)
+
+	d.AddHandler(onGuildJoin)
+
 	if err = d.Open(); err != nil {
 		l.Panic(err)
 	}
@@ -41,7 +45,25 @@ func main() {
 	<-shutdown
 }
 
+func onGuildJoin(s *discordgo.Session, gc *discordgo.GuildCreate) {
+	// Fires everytime on startup. Check if config exists already
+	if _, err := os.Stat(fmt.Sprintf("resources/guilds/%s", gc.Guild.ID)); os.IsNotExist(err) {
+		for _, channel := range gc.Channels {
+			if channel.Type == discordgo.ChannelTypeGuildText {
+				perms, _ := s.State.UserChannelPermissions(s.State.User.ID, channel.ID)
+				if perms&discordgo.PermissionSendMessages > 0 {
+					s.ChannelMessageSend(channel.ID, "New server requires configuration!")
+					break
+				}
+			}
+		}
+	}
+}
+
 func init() {
+	if _, err := os.Stat("resources/guilds"); os.IsNotExist(err) {
+		os.Mkdir("resources/guilds", os.ModePerm)
+	}
 	l = log.New(os.Stderr, "main: ", log.LstdFlags|log.Lshortfile)
 	fileContents, err := ioutil.ReadFile("resources/config/MainConfig.json")
 	if err != nil {
