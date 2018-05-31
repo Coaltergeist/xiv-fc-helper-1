@@ -10,5 +10,8 @@ type FreeCompany struct {
 	Characters map[string]int `json:"characters"` // Map discord user ID -> ffxiv character id
 }
 
+// A Character is a relationship between a user's character and their discord account
+// Since FFXIV isn't conducive to alternate characters, it's generally safe to assume
+// you can link the relationship of FC -> Discord Account/XIV Character
 type Character struct {
 }

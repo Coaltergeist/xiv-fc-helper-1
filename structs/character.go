@@ -25,6 +25,31 @@ type XIVDBCharacterSearch struct {
 	} `json:"characters"`
 }
 
+// LodestoneCharacter represents a character straight off the lodestone
+type LodestoneCharacter struct {
+	ID          int    `json:"id"`
+	Server      string `json:"server"`
+	FirstName   string `json:"firstName"`
+	LastName    string `json:"lastName"`
+	Title       string `json:"title"`
+	TitleBefore bool   `json:"titleBefore"`
+
+	Race    string `json:"race"`
+	Faction string `json:"faction"`
+	Gender  string `json:"gender"`
+
+	NameDay   string `json:"nameDay"`
+	Guardian  string `json:"guardian"`
+	CityState string `json:"cityState"`
+
+	GrandCompany string `json:"grandCompany"`
+	FreeCompany  string `json:"freeCompany"`
+
+	LodestoneURL string `json:"lodestoneURL"`
+	ImageURL     string `json:"imageURL"`
+	JobImageURL  string `json:"jobImageURL"`
+}
+
 // XIVDBCharacter represents a queried character
 type XIVDBCharacter struct {
 	LodestoneID                  int    `json:"lodestone_id"`

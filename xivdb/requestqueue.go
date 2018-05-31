@@ -61,7 +61,7 @@ func processQueue() {
 
 func init() {
 	l = log.New(os.Stderr, "xivdb: ", log.LstdFlags|log.Lshortfile)
-	l.Println("Initializing request queue...")
+	l.Println("Initializing XIVDB request queue...")
 	requestQueue = &queue{
 		elements: make([]*Request, 0),
 	}
