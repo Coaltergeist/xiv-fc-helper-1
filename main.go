@@ -7,6 +7,7 @@ import (
 	"log"
 	"os"
 	"os/signal"
+	"strings"
 
 	"github.com/bwmarrin/discordgo"
 	"github.com/paul-io/xiv-bot/cmds"
@@ -34,6 +35,8 @@ func main() {
 
 	d.AddHandler(onGuildJoin)
 
+	d.AddHandler(configureOnMessage)
+
 	if err = d.Open(); err != nil {
 		l.Panic(err)
 	}
@@ -52,7 +55,11 @@ func onGuildJoin(s *discordgo.Session, gc *discordgo.GuildCreate) {
 			if channel.Type == discordgo.ChannelTypeGuildText {
 				perms, _ := s.State.UserChannelPermissions(s.State.User.ID, channel.ID)
 				if perms&discordgo.PermissionSendMessages > 0 {
-					s.ChannelMessageSend(channel.ID, "New server requires configuration!")
+					msg := []string{
+						"Hi, I'm here to help manage your FFXIV FC!",
+						"To start basic configuration, have someone with the Manage Server permission mention me and say \"configure\"",
+					}
+					s.ChannelMessageSend(channel.ID, strings.Join(msg, "\n"))
 					break
 				}
 			}

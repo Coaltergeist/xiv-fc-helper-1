@@ -25,6 +25,8 @@ type command struct {
 	usage        string
 	commandCount int
 	deleteAfter  bool
+
+	permissions int
 }
 
 func add(c *command) {
@@ -36,13 +38,13 @@ func add(c *command) {
 }
 
 // HandleCommand handles the command message
-func handleCommand(s *discordgo.Session, m *discordgo.Message) {
+func handleCommand(s *discordgo.Session, e *discordgo.MessageCreate) {
 	defer func() {
 		if r := recover(); r != nil {
 			l.Println("recovered in handleCommand")
 		}
 	}()
-	cmdTrigger := strings.Split(m.Content, " ")[0][len(commandPrefix):]
+	cmdTrigger := strings.Split(e.Message.Content, " ")[0][len(commandPrefix):]
 	cmd, ok := commandMap[cmdTrigger]
 	if !ok {
 		cmd, ok = commandMap[aliasMap[cmdTrigger]]
@@ -51,10 +53,13 @@ func handleCommand(s *discordgo.Session, m *discordgo.Message) {
 		}
 	}
 	go func() {
-		cmd.execute(s, m)
+		if !hasPermissions(s, e, cmd) {
+			return
+		}
+		cmd.execute(s, e.Message)
 		cmd.commandCount++
 		if cmd.deleteAfter {
-			s.ChannelMessageDelete(m.ChannelID, m.ID)
+			s.ChannelMessageDelete(e.Message.ChannelID, e.Message.ID)
 		}
 	}()
 }
@@ -65,30 +70,17 @@ func OnMessage(s *discordgo.Session, e *discordgo.MessageCreate) {
 		return
 	}
 	if e.Message.Content[0:len(commandPrefix)] == commandPrefix {
-		ch, err := s.State.Channel(e.ChannelID)
-		if err != nil {
-			ch, err = s.Channel(e.ChannelID)
-			if err != nil {
-				l.Println(err.Error())
-				return
-			}
-		}
-		mem, err := s.State.Member(ch.GuildID, e.Author.ID)
-		if err != nil {
-			mem, err = s.GuildMember(ch.GuildID, e.Author.ID)
-			if err != nil {
-				l.Println(err.Error())
-				return
-			}
-		}
-
-		if hasPermissions(mem) {
-			handleCommand(s, e.Message)
-		}
+		handleCommand(s, e)
 	}
 }
 
-// TODO: permission system
-func hasPermissions(m *discordgo.Member) bool {
-	return true
+func hasPermissions(s *discordgo.Session, e *discordgo.MessageCreate, cmd *command) bool {
+	perms, err := s.State.UserChannelPermissions(e.Author.ID, e.ChannelID)
+	if err != nil {
+		panic(err)
+	}
+	if cmd.permissions == 0 || cmd.permissions&perms > 0 {
+		return true
+	}
+	return false
 }
