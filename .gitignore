@@ -13,3 +13,6 @@
 
 # bot ELF
 bot
+
+# guild resources
+resources/guilds/*
