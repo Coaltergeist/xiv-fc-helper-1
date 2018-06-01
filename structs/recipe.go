@@ -1,5 +1,6 @@
 package structs
 
+// XIVDBRecipe represents a full recipe for a craftable item
 type XIVDBRecipe struct {
 	CanHq         int    `json:"can_hq"`
 	CanQuickSynth int    `json:"can_quick_synth"`
@@ -79,6 +80,7 @@ type XIVDBRecipe struct {
 	Type                    string            `json:"_type"`
 }
 
+// XIVDBRecipeTree represents the tree of recipes to create a specific recipe
 type XIVDBRecipeTree struct {
 	AttributesBase struct {
 		AutoAttack      int `json:"auto_attack"`
