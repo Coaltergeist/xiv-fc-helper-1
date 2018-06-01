@@ -6,8 +6,8 @@ import (
 
 	"github.com/bwmarrin/discordgo"
 	"github.com/paul-io/discordgo-embeds/embed"
-	"github.com/paul-io/xiv-bot/freecompany"
-	"github.com/paul-io/xiv-bot/lodestone"
+	"github.com/paul-io/xiv-fc-helper/freecompany"
+	"github.com/paul-io/xiv-fc-helper/lodestone"
 )
 
 func whoisUser(s *discordgo.Session, m *discordgo.Message) {

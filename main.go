@@ -9,11 +9,11 @@ import (
 	"os/signal"
 	"strings"
 
-	"github.com/paul-io/xiv-bot/freecompany"
-	"github.com/paul-io/xiv-bot/reminders"
+	"github.com/paul-io/xiv-fc-helper/freecompany"
+	"github.com/paul-io/xiv-fc-helper/reminders"
 
 	"github.com/bwmarrin/discordgo"
-	"github.com/paul-io/xiv-bot/cmds"
+	"github.com/paul-io/xiv-fc-helper/cmds"
 )
 
 type config struct {

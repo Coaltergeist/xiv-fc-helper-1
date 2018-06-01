@@ -7,7 +7,7 @@ import (
 	"strings"
 
 	"github.com/PuerkitoBio/goquery"
-	"github.com/paul-io/xiv-bot/structs"
+	"github.com/paul-io/xiv-fc-helper/structs"
 )
 
 // GetCharacterURL resolves the URL to the lodestone of a character based on their

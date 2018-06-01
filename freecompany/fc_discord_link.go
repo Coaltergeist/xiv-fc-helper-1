@@ -14,8 +14,8 @@ import (
 	"regexp"
 	"strings"
 
-	"github.com/paul-io/xiv-bot/lodestone"
-	"github.com/paul-io/xiv-bot/reminders"
+	"github.com/paul-io/xiv-fc-helper/lodestone"
+	"github.com/paul-io/xiv-fc-helper/reminders"
 
 	"github.com/bwmarrin/discordgo"
 )

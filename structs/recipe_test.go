@@ -5,7 +5,7 @@ import (
 	"testing"
 
 	"github.com/davecgh/go-spew/spew"
-	"github.com/paul-io/xiv-bot/xivdb"
+	"github.com/paul-io/xiv-fc-helper/xivdb"
 )
 
 func TestRecipe(t *testing.T) {

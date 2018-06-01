@@ -6,7 +6,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/paul-io/xiv-bot/structs"
+	"github.com/paul-io/xiv-fc-helper/structs"
 
 	"github.com/PuerkitoBio/goquery"
 )

@@ -6,7 +6,7 @@ import (
 
 	"github.com/bwmarrin/discordgo"
 	"github.com/paul-io/discordgo-embeds/embed"
-	"github.com/paul-io/xiv-bot/lodestone"
+	"github.com/paul-io/xiv-fc-helper/lodestone"
 )
 
 func lodestoneCharacterSearchCommand(s *discordgo.Session, m *discordgo.Message) {
