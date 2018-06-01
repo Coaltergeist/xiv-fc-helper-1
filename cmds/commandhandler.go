@@ -31,6 +31,7 @@ type command struct {
 
 func add(c *command) {
 	commandMap[c.trigger] = c
+	aliasMap[c.trigger] = c.trigger
 	for _, alias := range c.aliases {
 		aliasMap[alias] = c.trigger
 	}

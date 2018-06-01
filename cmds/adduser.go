@@ -70,6 +70,7 @@ func init() {
 		execute: configureUser,
 		trigger: "adduser",
 		aliases: []string{"iam"},
-		desc:    "Configure your own user for your FC/discord!",
+		desc:    "Configure your own user for your FC/discord! Discord server must have configured your FC first!",
+		usage:   "adduser first-name last-name",
 	})
 }

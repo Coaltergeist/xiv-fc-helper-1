@@ -78,5 +78,6 @@ func init() {
 		trigger: "whois",
 		aliases: []string{"who"},
 		desc:    "Lookup someone else's character!",
+		usage:   "whois `@mention`",
 	})
 }

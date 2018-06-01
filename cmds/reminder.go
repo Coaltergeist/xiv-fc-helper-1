@@ -8,9 +8,11 @@ func toggleReminder(s *discordgo.Session, m *discordgo.Message) {
 
 func init() {
 	add(&command{
-		execute: toggleReminder,
-		trigger: "reminder",
-		aliases: []string{"dailyreminders"},
-		desc:    "Toggle on/off daily reminders!",
+		execute:     toggleReminder,
+		trigger:     "reminder",
+		aliases:     []string{"dailyreminders"},
+		desc:        "Toggle on/off daily reminders!",
+		usage:       "reminder",
+		permissions: discordgo.PermissionManageServer,
 	})
 }

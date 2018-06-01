@@ -14,5 +14,6 @@ func init() {
 		trigger: "ping",
 		aliases: []string{"pingme"},
 		desc:    "Am I alive?",
+		usage:   "ping",
 	})
 }
