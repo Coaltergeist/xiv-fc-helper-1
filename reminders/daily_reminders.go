@@ -99,6 +99,14 @@ func init() {
 			" - Daily repeatable quests",
 			" - Squadron training (3)",
 		}
+		// First time at start doesn't tick...
+		for _, meta := range reminderChannels {
+			err := doNotification(meta.channelID, strings.Join(msg, "\n"))
+			if err != nil {
+				l.Println(err)
+			}
+			time.Sleep(500 * time.Millisecond)
+		}
 		for range notifTicker.C {
 			for _, meta := range reminderChannels {
 				err := doNotification(meta.channelID, strings.Join(msg, "\n"))
@@ -120,6 +128,14 @@ func init() {
 			" - Weekly repeatable quests",
 			" - Challenge Log",
 			" - New Wondrous Tails",
+		}
+		// First time at start doesn't tick...
+		for _, meta := range reminderChannels {
+			err := doNotification(meta.channelID, strings.Join(msg, "\n"))
+			if err != nil {
+				l.Println(err)
+			}
+			time.Sleep(500 * time.Millisecond)
 		}
 		for range notifTicker.C {
 			for _, meta := range reminderChannels {

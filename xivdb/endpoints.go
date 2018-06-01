@@ -5,11 +5,13 @@ import "fmt"
 var searchTypeEndpoints = map[RequestType]string{
 	CHARACTER: "one=characters&",
 	ITEM:      "one=items&",
+	RECIPE:    "one=recipes&",
 }
 
 var queryTypeEndpoints = map[RequestType]string{
 	CHARACTER: "character/",
 	ITEM:      "item/",
+	RECIPE:    "recipe/",
 }
 
 const searchURL = baseURL + "search?"
