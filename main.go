@@ -9,6 +9,9 @@ import (
 	"os/signal"
 	"strings"
 
+	"github.com/paul-io/xiv-bot/freecompany"
+	"github.com/paul-io/xiv-bot/reminders"
+
 	"github.com/bwmarrin/discordgo"
 	"github.com/paul-io/xiv-bot/cmds"
 )
@@ -35,13 +38,16 @@ func main() {
 
 	d.AddHandler(onGuildJoin)
 
-	d.AddHandler(configureOnMessage)
+	d.AddHandler(freecompany.ConfigureOnMessage)
 
 	if err = d.Open(); err != nil {
 		l.Panic(err)
 	}
 
 	l.Println("Bot is now running")
+
+	reminders.RegisterSession(d)
+	l.Println("Registered singleton session for reminders")
 
 	shutdown := make(chan os.Signal, 1)
 	signal.Notify(shutdown, os.Interrupt, os.Kill)

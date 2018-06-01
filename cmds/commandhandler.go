@@ -44,6 +44,12 @@ func handleCommand(s *discordgo.Session, e *discordgo.MessageCreate) {
 			l.Println("recovered in handleCommand")
 		}
 	}()
+	if perms, err := s.UserChannelPermissions(s.State.User.ID, e.ChannelID); err == nil {
+		if perms&discordgo.PermissionSendMessages == 0 {
+			// Can't speak in the channel? Don't bother
+			return
+		}
+	}
 	cmdTrigger := strings.Split(e.Message.Content, " ")[0][len(commandPrefix):]
 	cmd, ok := commandMap[cmdTrigger]
 	if !ok {

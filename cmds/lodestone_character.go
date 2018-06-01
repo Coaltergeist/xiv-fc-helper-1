@@ -15,6 +15,15 @@ func lodestoneCharacterSearchCommand(s *discordgo.Session, m *discordgo.Message)
 		s.ChannelMessageSend(m.ChannelID, fmt.Sprintf("Incorrect usage. Use %shelp character for correct usage", commandPrefix))
 		return
 	}
+	em := embed.New()
+	em.Color = s.State.UserColor(m.Author.ID, m.ChannelID)
+	em.SetDesc("Searching...")
+	searchMsg, _ := s.ChannelMessageSendEmbed(m.ChannelID, em.MessageEmbed)
+	defer func() {
+		if searchMsg != nil {
+			s.ChannelMessageDelete(m.ChannelID, searchMsg.ID)
+		}
+	}()
 
 	world := split[1]
 	first := split[2]
@@ -32,7 +41,7 @@ func lodestoneCharacterSearchCommand(s *discordgo.Session, m *discordgo.Message)
 		s.ChannelMessageSend(m.ChannelID, fmt.Sprintf("error: %s", err))
 		return
 	}
-	em := embed.New()
+	em = embed.New()
 	em.SetAuthor(fmt.Sprintf("%s %s of %s", character.FirstName, character.LastName, character.Server), character.LodestoneURL, "").
 		SetThumbnail(character.JobImageURL)
 	em.MessageEmbed.Color = s.State.UserColor(m.Author.ID, m.ChannelID)
