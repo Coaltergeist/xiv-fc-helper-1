@@ -146,6 +146,7 @@ func init() {
 		execute: recipeCommand,
 		trigger: "recipe",
 		aliases: []string{"craft"},
-		desc:    "Am I alive?",
+		desc:    "Gives the relevant info of a crafting recipe",
+		usage:   "recipe recipe-name",
 	})
 }
