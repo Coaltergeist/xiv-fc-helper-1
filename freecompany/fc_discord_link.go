@@ -271,6 +271,8 @@ func containsIgnoreCase(arr []string, toFind string) bool {
 	return false
 }
 
+// Serialize takes a discord server ID and writes its details
+// to disk
 func Serialize(discordServerID string) error {
 	path := fmt.Sprintf("resources/guilds/%s/", discordServerID)
 	if _, err := os.Stat(path); os.IsNotExist(err) {
