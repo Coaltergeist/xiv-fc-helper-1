@@ -115,28 +115,28 @@ type XIVDBRecipe struct {
 
 // XIVDBRecipeTree represents the tree of recipes to create a specific recipe
 type XIVDBRecipeTree struct {
-	AttributesBase struct {
-		AutoAttack      int `json:"auto_attack"`
-		AutoAttackHq    int `json:"auto_attack_hq"`
-		BlockRate       int `json:"block_rate"`
-		BlockRateHq     int `json:"block_rate_hq"`
-		BlockStrength   int `json:"block_strength"`
-		BlockStrengthHq int `json:"block_strength_hq"`
-		Damage          int `json:"damage"`
-		DamageHq        int `json:"damage_hq"`
-		Defense         int `json:"defense"`
-		DefenseHq       int `json:"defense_hq"`
-		Delay           int `json:"delay"`
-		DelayHq         int `json:"delay_hq"`
-		Dps             int `json:"dps"`
-		DpsHq           int `json:"dps_hq"`
-		ID              int `json:"id"`
-		MagicDamage     int `json:"magic_damage"`
-		MagicDamageHq   int `json:"magic_damage_hq"`
-		MagicDefense    int `json:"magic_defense"`
-		MagicDefenseHq  int `json:"magic_defense_hq"`
-		//Patch           int `json:"patch"`
-	} `json:"attributes_base"`
+	// AttributesBase struct {
+	// 	AutoAttack      int `json:"auto_attack"`
+	// 	AutoAttackHq    int `json:"auto_attack_hq"`
+	// 	BlockRate       int `json:"block_rate"`
+	// 	BlockRateHq     int `json:"block_rate_hq"`
+	// 	BlockStrength   int `json:"block_strength"`
+	// 	BlockStrengthHq int `json:"block_strength_hq"`
+	// 	Damage          int `json:"damage"`
+	// 	DamageHq        int `json:"damage_hq"`
+	// 	Defense         int `json:"defense"`
+	// 	DefenseHq       int `json:"defense_hq"`
+	// 	Delay           int `json:"delay"`
+	// 	DelayHq         int `json:"delay_hq"`
+	// 	Dps             int `json:"dps"`
+	// 	DpsHq           int `json:"dps_hq"`
+	// 	ID              int `json:"id"`
+	// 	MagicDamage     int `json:"magic_damage"`
+	// 	MagicDamageHq   int `json:"magic_damage_hq"`
+	// 	MagicDefense    int `json:"magic_defense"`
+	// 	MagicDefenseHq  int `json:"magic_defense_hq"`
+	// 	//Patch           int `json:"patch"`
+	// } `json:"attributes_base"`
 	AttributesParams           []interface{} `json:"attributes_params"`
 	AttributesParamsSpecial    []interface{} `json:"attributes_params_special"`
 	BonusName                  interface{}   `json:"bonus_name"`

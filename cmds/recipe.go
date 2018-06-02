@@ -92,6 +92,7 @@ func recipeCommand(s *discordgo.Session, m *discordgo.Message) {
 }
 
 func materialRecursion(node structs.XIVDBRecipeTree, matMap map[string]int, multiplier int) map[string]int {
+	//fmt.Println(node.Name)
 	recipe, isRecipe := idLookup(node.ID)
 	if !isRecipe {
 		matMap[recipe.Name] += multiplier
@@ -99,10 +100,10 @@ func materialRecursion(node structs.XIVDBRecipeTree, matMap map[string]int, mult
 		tree := recipe.Tree
 		for i := range tree {
 			if len(tree[i].Synths) != 0 {
-				quantity := tree[i].Quantity
+				multiplier *= tree[i].Quantity
 				synths := tree[i].Synths
 				for k := range synths {
-					matMap = materialRecursion(synths[k], matMap, quantity)
+					matMap = materialRecursion(synths[k], matMap, multiplier)
 				}
 			} else {
 				matMap[tree[i].Name] += tree[i].Quantity
