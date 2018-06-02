@@ -1,6 +1,7 @@
 package cmds
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"strings"
@@ -14,7 +15,7 @@ import (
 
 func recipeCommand(s *discordgo.Session, m *discordgo.Message) {
 	split := strings.Split(m.Content, " ")
-	if len(split) <= 1 {
+	if len(split) < 2 {
 		s.ChannelMessageSend(m.ChannelID, fmt.Sprintf("Incorrect usage. Use %shelp item for correct usage", commandPrefix))
 		return
 	}
@@ -48,11 +49,11 @@ func recipeCommand(s *discordgo.Session, m *discordgo.Message) {
 
 	matMap := make(map[string]int)
 
-	matsNeeded := ""
+	var matsNeeded bytes.Buffer
 
 	tree := recipe.Tree
 	for i := range tree {
-		matsNeeded += fmt.Sprintf("\n%d %s", tree[i].Quantity, tree[i].Name)
+		matsNeeded.WriteString(fmt.Sprintf("\n%d %s", tree[i].Quantity, tree[i].Name))
 		if len(tree[i].Synths) != 0 {
 			quantity := tree[i].Quantity
 			synths := tree[i].Synths
@@ -67,32 +68,38 @@ func recipeCommand(s *discordgo.Session, m *discordgo.Message) {
 	em := embed.New()
 
 	author := recipe.Name
-	job := ""
-	level := fmt.Sprintf("%d", recipe.Level)
-	job += "Level " + level + " "
+	var job bytes.Buffer
+	job.WriteString(fmt.Sprintf("Level %d ", recipe.Level))
 	for i := 0; i < recipe.Stars; i++ {
-		job += "★"
+		job.WriteString("★")
 	}
-
-	title := fmt.Sprintf("%s", recipe.ClassName)
 
 	em.SetAuthor(author, recipe.URLXivdb, "").
 		SetThumbnail(recipe.Icon).
 		SetColor(colors.Cyan()).
-		AddField(title, job, false).
-		AddField("Recipe", matsNeeded, true)
+		AddField(recipe.ClassName, job.String(), false).
+		AddField("Recipe", matsNeeded.String(), true)
 
-	description := ""
+	var (
+		realMats  bytes.Buffer
+		catalysts bytes.Buffer
+	)
 	for k, v := range matMap {
-		description += fmt.Sprintf("%d %s\n", v, k)
+		if strings.Contains(k, " Crystal") || strings.Contains(k, " Shard") || strings.Contains(k, " Cluster") {
+			catalysts.WriteString(fmt.Sprintf("%d %s\n", v, k))
+		} else {
+			realMats.WriteString(fmt.Sprintf("%d %s\n", v, k))
+		}
 	}
-	em.AddField("All Mats Needed", description, true)
-	s.ChannelMessageDelete(m.ChannelID, message.ID)
+	em.AddField("All Mats", realMats.String(), true)
+	em.AddField("All Catalysts", catalysts.String(), true)
+	if message != nil {
+		s.ChannelMessageDelete(m.ChannelID, message.ID)
+	}
 	s.ChannelMessageSendEmbed(m.ChannelID, em.MessageEmbed)
 }
 
 func materialRecursion(node structs.XIVDBRecipeTree, matMap map[string]int, multiplier int) map[string]int {
-	//fmt.Println(node.Name)
 	recipe, isRecipe := idLookup(node.ID)
 	if !isRecipe {
 		matMap[recipe.Name] += multiplier
@@ -113,19 +120,18 @@ func materialRecursion(node structs.XIVDBRecipeTree, matMap map[string]int, mult
 	return matMap
 }
 
-func idLookup(id int) (structs.XIVDBRecipe, bool) {
+func idLookup(id int) (*structs.XIVDBRecipe, bool) {
 	request := xivdb.NewSearchRequest()
 	request.SetType(xivdb.RECIPE)
 	request.SetSearch(fmt.Sprintf("%d", id))
 	data := request.Queue().Consume()
 
 	var recipeResults structs.XIVDBRecipeSearch
-	var emptyRecipe structs.XIVDBRecipe
 	if err := json.Unmarshal(data, &recipeResults); err != nil {
 		panic(err)
 	}
 	if recipeResults.Recipes.Total == 0 || recipeResults.Recipes.Total > 1 {
-		return emptyRecipe, false
+		return &structs.XIVDBRecipe{}, false
 	}
 
 	queryRequest := xivdb.NewQueryRequest()
@@ -138,7 +144,7 @@ func idLookup(id int) (structs.XIVDBRecipe, bool) {
 		panic(err)
 	}
 
-	return recipe, true
+	return &recipe, true
 }
 
 func init() {
