@@ -1,5 +1,38 @@
 package structs
 
+// XIVDBRecipeSearch represents a search on xivdb
+type XIVDBRecipeSearch struct {
+	Recipes struct {
+		Results []struct {
+			ClassName     string      `json:"class_name"`
+			Color         string      `json:"color"`
+			Icon          string      `json:"icon"`
+			IconLodestone string      `json:"icon_lodestone"`
+			ID            int         `json:"id"`
+			ItemName      string      `json:"item_name"`
+			Level         int         `json:"level"`
+			LevelDiff     int         `json:"level_diff"`
+			LevelView     int         `json:"level_view"`
+			Masterbook    interface{} `json:"masterbook"`
+			Name          string      `json:"name"`
+			Stars         int         `json:"stars"`
+			StarsHTML     string      `json:"stars_html"`
+			URL           string      `json:"url"`
+			URLAPI        string      `json:"url_api"`
+			URLType       string      `json:"url_type"`
+			URLXivdb      string      `json:"url_xivdb"`
+		} `json:"results"`
+		Total  int `json:"total"`
+		Paging struct {
+			Page  int   `json:"page"`
+			Total int   `json:"total"`
+			Pages []int `json:"pages"`
+			Next  int   `json:"next"`
+			Prev  int   `json:"prev"`
+		} `json:"paging"`
+	} `json:"recipes"`
+}
+
 // XIVDBRecipe represents a full recipe for a craftable item
 type XIVDBRecipe struct {
 	CanHq         int    `json:"can_hq"`
@@ -12,13 +45,13 @@ type XIVDBRecipe struct {
 		ID             int    `json:"id"`
 		IsJob          int    `json:"is_job"`
 		Name           string `json:"name"`
-		Patch          int    `json:"patch"`
+		//Patch          int    `json:"patch"`
 	} `json:"classjob"`
 	Color                    string          `json:"color"`
 	CraftQuantity            int             `json:"craft_quantity"`
 	CraftType                int             `json:"craft_type"`
 	Difficulty               int             `json:"difficulty"`
-	DifficultyFactor         int             `json:"difficulty_factor"`
+	DifficultyFactor         float64         `json:"difficulty_factor"`
 	Durability               int             `json:"durability"`
 	DurabilityFactor         float64         `json:"durability_factor"`
 	ElementName              string          `json:"element_name"`
@@ -48,12 +81,12 @@ type XIVDBRecipe struct {
 	NameFr                   string          `json:"name_fr"`
 	NameJa                   string          `json:"name_ja"`
 	Number                   int             `json:"number"`
-	Patch                    struct {
-		Name   string `json:"name"`
-		Number string `json:"number"`
-		Patch  int    `json:"patch"`
-		URL    string `json:"url"`
-	} `json:"patch"`
+	// Patch                    struct {
+	// 	Name   string `json:"name"`
+	// 	Number string `json:"number"`
+	// 	Patch  int    `json:"patch"`
+	// 	URL    string `json:"url"`
+	// } `json:"patch"`
 	Quality                 int               `json:"quality"`
 	QualityFactor           float64           `json:"quality_factor"`
 	QuickSynthControl       int               `json:"quick_synth_control"`
@@ -102,7 +135,7 @@ type XIVDBRecipeTree struct {
 		MagicDamageHq   int `json:"magic_damage_hq"`
 		MagicDefense    int `json:"magic_defense"`
 		MagicDefenseHq  int `json:"magic_defense_hq"`
-		Patch           int `json:"patch"`
+		//Patch           int `json:"patch"`
 	} `json:"attributes_base"`
 	AttributesParams           []interface{} `json:"attributes_params"`
 	AttributesParamsSpecial    []interface{} `json:"attributes_params_special"`
@@ -139,13 +172,14 @@ type XIVDBRecipeTree struct {
 	LodestoneID                string        `json:"lodestone_id"`
 	LodestoneType              string        `json:"lodestone_type"`
 	Name                       string        `json:"name"`
-	Patch                      struct {
-		Name   string `json:"name"`
-		Number string `json:"number"`
-		Patch  int    `json:"patch"`
-		URL    string `json:"url"`
-	} `json:"patch"`
+	// Patch                      struct {
+	// 	Name   string `json:"name"`
+	// 	Number string `json:"number"`
+	// 	Patch  int    `json:"patch"`
+	// 	URL    string `json:"url"`
+	// } `json:"patch"`
 	PriceMid     int                        `json:"price_mid"`
+	Quantity     int                        `json:"quantity"`
 	Rarity       int                        `json:"rarity"`
 	SeriesName   interface{}                `json:"series_name"`
 	SlotEquip    int                        `json:"slot_equip"`

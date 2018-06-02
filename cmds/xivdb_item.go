@@ -6,9 +6,9 @@ import (
 	"strings"
 
 	"github.com/bwmarrin/discordgo"
+	"github.com/coaltergeist/xiv-fc-helper-1/structs"
+	"github.com/coaltergeist/xiv-fc-helper-1/xivdb"
 	"github.com/paul-io/discordgo-embeds/embed"
-	"github.com/paul-io/xiv-fc-helper/structs"
-	"github.com/paul-io/xiv-fc-helper/xivdb"
 )
 
 func xivdbItemSearchCommand(s *discordgo.Session, m *discordgo.Message) {
