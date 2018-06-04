@@ -7,7 +7,7 @@ import (
 	"strings"
 
 	"github.com/bwmarrin/discordgo"
-	strip "github.com/grokify/html-strip-tags-go"
+	"github.com/grokify/html-strip-tags-go"
 	"github.com/paul-io/discordgo-embeds/embed"
 	"github.com/paul-io/xiv-fc-helper/structs"
 	"github.com/paul-io/xiv-fc-helper/xivdb"
