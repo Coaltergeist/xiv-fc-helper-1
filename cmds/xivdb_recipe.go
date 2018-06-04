@@ -24,7 +24,11 @@ func recipeCommand(s *discordgo.Session, m *discordgo.Message) {
 	)
 	split := strings.Split(m.Content, " ")
 	if len(split) < 2 {
+<<<<<<< HEAD:cmds/xivdb_recipe.go
 		s.ChannelMessageSend(m.ChannelID, fmt.Sprintf("Incorrect usage. Use %shelp recijpe for correct usage", commandPrefix))
+=======
+		s.ChannelMessageSend(m.ChannelID, fmt.Sprintf("Incorrect usage. Use %shelp item for correct usage", commandPrefix))
+>>>>>>> e94617e54d28291f54f8b3d9a35711d287ec6ae1:cmds/recipe.go
 		return
 	}
 	recipeName := split[1:]
