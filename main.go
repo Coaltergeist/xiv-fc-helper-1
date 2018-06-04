@@ -10,7 +10,6 @@ import (
 	"strings"
 
 	"github.com/paul-io/xiv-fc-helper/freecompany"
-	"github.com/paul-io/xiv-fc-helper/reminders"
 
 	"github.com/bwmarrin/discordgo"
 	"github.com/paul-io/xiv-fc-helper/cmds"
@@ -38,6 +37,8 @@ func main() {
 
 	d.AddHandler(onGuildJoin)
 
+	d.AddHandler(onGuildDelete)
+
 	d.AddHandler(freecompany.ConfigureOnMessage)
 
 	if err = d.Open(); err != nil {
@@ -46,7 +47,7 @@ func main() {
 
 	l.Println("Bot is now running")
 
-	reminders.RegisterSession(d)
+	freecompany.RegisterSession(d)
 	l.Println("Registered singleton session for reminders")
 
 	shutdown := make(chan os.Signal, 1)
@@ -70,6 +71,18 @@ func onGuildJoin(s *discordgo.Session, gc *discordgo.GuildCreate) {
 				}
 			}
 		}
+	}
+}
+
+func onGuildDelete(s *discordgo.Session, gd *discordgo.GuildDelete) {
+	fmt.Printf("Guild %s left; deleting folder\n", gd.ID)
+	if _, err := os.Stat(fmt.Sprintf("resources/guilds/%s", gd.Guild.ID)); err == nil {
+		err := os.RemoveAll(fmt.Sprintf("resources/guilds/%s", gd.Guild.ID))
+		if err != nil {
+			l.Println(err.Error())
+			return
+		}
+		freecompany.DeleteGuild(gd.Guild.ID)
 	}
 }
 

@@ -56,12 +56,24 @@ func configureUser(s *discordgo.Session, m *discordgo.Message) {
 		s.ChannelMessageSend(m.ChannelID, fmt.Sprintf("error: %s", err))
 		return
 	}
+	if fc.Characters == nil {
+		fc.Characters = make(map[string]*freecompany.Character)
+	}
 	fc.Characters[m.Author.ID] = &freecompany.Character{
 		ID:        character.ID,
 		FirstName: character.FirstName,
 		LastName:  character.LastName,
 	}
 	s.ChannelMessageSend(m.ChannelID, fmt.Sprintf("Registered **%s %s** of **%s** to your account!", character.FirstName, character.LastName, strings.Title(fc.World)))
+	if member, err := s.GuildMember(ch.GuildID, m.Author.ID); err == nil {
+		nickname := fmt.Sprintf("%s (%s %s)", member.Nick, character.FirstName, character.LastName)
+		if len(member.Nick) == 0 {
+			nickname = fmt.Sprintf("%s %s", m.Author.Username, nickname)
+		}
+		if err := s.GuildMemberNickname(ch.GuildID, m.Author.ID, nickname); err != nil {
+			l.Println(err)
+		}
+	}
 	freecompany.Serialize(ch.GuildID)
 }
 

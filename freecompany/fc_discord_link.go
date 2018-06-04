@@ -15,7 +15,6 @@ import (
 	"strings"
 
 	"github.com/paul-io/xiv-fc-helper/lodestone"
-	"github.com/paul-io/xiv-fc-helper/reminders"
 
 	"github.com/bwmarrin/discordgo"
 )
@@ -84,6 +83,11 @@ func GetFreeCompany(discordGuildID string) (*FreeCompany, error) {
 		return nil, errors.New("free company not registered yet")
 	}
 	return fc, nil
+}
+
+// DeleteGuild removes the guild from the FC mapping
+func DeleteGuild(discordGuildID string) {
+	delete(discordLink, discordGuildID)
 }
 
 // ConfigureOnMessage is a state machine to configure a discord server's FC
@@ -240,7 +244,7 @@ func ConfigureOnMessage(s *discordgo.Session, e *discordgo.MessageCreate) {
 			}
 			s.ChannelMessageSend(e.ChannelID, strings.Join(msg, "\n"))
 			fc.ConfigurationState = FINISHED
-			reminders.RegisterReminders(fc.ResetReminderChannel, ch.GuildID)
+			registerReminders(fc.ResetReminderChannel, ch.GuildID)
 		} else if strings.EqualFold(e.Message.Content, "no") {
 			s.ChannelMessageSend(e.ChannelID, fmt.Sprintf("Please enter your Free Company name"))
 			fc.ConfigurationState = RESETTIMERS
@@ -271,6 +275,8 @@ func containsIgnoreCase(arr []string, toFind string) bool {
 	return false
 }
 
+// Serialize takes a discord server ID and writes its details
+// to disk
 func Serialize(discordServerID string) error {
 	path := fmt.Sprintf("resources/guilds/%s/", discordServerID)
 	if _, err := os.Stat(path); os.IsNotExist(err) {
@@ -318,12 +324,45 @@ func deserialize() error {
 			fc.Characters = make(map[string]*Character)
 		}
 		if len(fc.ResetReminderChannel) > 0 {
-			if err = reminders.RegisterReminders(fc.ResetReminderChannel, f.Name()); err != nil {
+			if err = registerReminders(fc.ResetReminderChannel, f.Name()); err != nil {
 				l.Println(err)
 			}
 		}
 	}
 	return nil
+}
+
+// RegisterReminder registers a channel to be the daily/weekly reset reminders
+func RegisterReminder(guildID, channelID string) error {
+	fc, ok := discordLink[guildID]
+	if !ok {
+		return fmt.Errorf("no guild found for ID %s", guildID)
+	}
+	if err := registerReminders(channelID, guildID); err != nil {
+		return err
+	}
+	fc.ResetReminderChannel = channelID
+	Serialize(guildID)
+	return nil
+}
+
+// DeregisterReminder deregisters a channel for daily/weekly reset reminders
+func DeregisterReminder(guildID string) error {
+	fc, ok := discordLink[guildID]
+	if !ok {
+		return fmt.Errorf("no guild found for ID %s", guildID)
+	}
+	if err := deregisterReminders(guildID); err != nil {
+		return err
+	}
+	fc.ResetReminderChannel = ""
+	Serialize(guildID)
+	return nil
+}
+
+// ReceivingReminders determines if an FC is receiving reminders
+func ReceivingReminders(guildID string) bool {
+	return GuildReceivingReminders(guildID)
 }
 
 func init() {
