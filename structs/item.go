@@ -35,28 +35,28 @@ type XIVDBItem struct {
 	Achievements    interface{} `json:"achievements"`
 	Action          int         `json:"action"`
 	AetherialReduce int         `json:"aetherial_reduce"`
-	AttributesBase  struct {
-		AutoAttack      int `json:"auto_attack"`
-		AutoAttackHq    int `json:"auto_attack_hq"`
-		BlockRate       int `json:"block_rate"`
-		BlockRateHq     int `json:"block_rate_hq"`
-		BlockStrength   int `json:"block_strength"`
-		BlockStrengthHq int `json:"block_strength_hq"`
-		Damage          int `json:"damage"`
-		DamageHq        int `json:"damage_hq"`
-		Defense         int `json:"defense"`
-		DefenseHq       int `json:"defense_hq"`
-		Delay           int `json:"delay"`
-		DelayHq         int `json:"delay_hq"`
-		Dps             int `json:"dps"`
-		DpsHq           int `json:"dps_hq"`
-		ID              int `json:"id"`
-		MagicDamage     int `json:"magic_damage"`
-		MagicDamageHq   int `json:"magic_damage_hq"`
-		MagicDefense    int `json:"magic_defense"`
-		MagicDefenseHq  int `json:"magic_defense_hq"`
-		Patch           int `json:"patch"`
-	} `json:"attributes_base"`
+	// AttributesBase  struct {
+	// 	AutoAttack      int `json:"auto_attack"`
+	// 	AutoAttackHq    int `json:"auto_attack_hq"`
+	// 	BlockRate       int `json:"block_rate"`
+	// 	BlockRateHq     int `json:"block_rate_hq"`
+	// 	BlockStrength   int `json:"block_strength"`
+	// 	BlockStrengthHq int `json:"block_strength_hq"`
+	// 	Damage          int `json:"damage"`
+	// 	DamageHq        int `json:"damage_hq"`
+	// 	Defense         int `json:"defense"`
+	// 	DefenseHq       int `json:"defense_hq"`
+	// 	Delay           int `json:"delay"`
+	// 	DelayHq         int `json:"delay_hq"`
+	// 	Dps             int `json:"dps"`
+	// 	DpsHq           int `json:"dps_hq"`
+	// 	ID              int `json:"id"`
+	// 	MagicDamage     int `json:"magic_damage"`
+	// 	MagicDamageHq   int `json:"magic_damage_hq"`
+	// 	MagicDefense    int `json:"magic_defense"`
+	// 	MagicDefenseHq  int `json:"magic_defense_hq"`
+	// 	Patch           int `json:"patch"`
+	// } `json:"attributes_base"`
 	AttributesParams           []interface{} `json:"attributes_params"`
 	AttributesParamsSpecial    []interface{} `json:"attributes_params_special"`
 	BaseParamModifier          int           `json:"base_param_modifier"`
@@ -159,12 +159,12 @@ type XIVDBItem struct {
 	NounJa                     interface{}   `json:"noun_ja"`
 	ParsedLodestone            int           `json:"parsed_lodestone"`
 	ParsedLodestoneTime        interface{}   `json:"parsed_lodestone_time"`
-	Patch                      struct {
-		Name   string `json:"name"`
-		Number string `json:"number"`
-		Patch  int    `json:"patch"`
-		URL    string `json:"url"`
-	} `json:"patch"`
+	// Patch                      struct {
+	// 	Name   string `json:"name"`
+	// 	Number string `json:"number"`
+	// 	Patch  int    `json:"patch"`
+	// 	URL    string `json:"url"`
+	// } `json:"patch"`
 	Plural      interface{} `json:"plural"`
 	PluralCns   string      `json:"plural_cns"`
 	PluralDe    interface{} `json:"plural_de"`
@@ -188,7 +188,7 @@ type XIVDBItem struct {
 			ID             int    `json:"id"`
 			IsJob          int    `json:"is_job"`
 			Name           string `json:"name"`
-			Patch          int    `json:"patch"`
+			//Patch          int    `json:"patch"`
 		} `json:"classjob"`
 		Color         string `json:"color"`
 		CraftQuantity int    `json:"craft_quantity"`
@@ -197,28 +197,28 @@ type XIVDBItem struct {
 		IconHq        string `json:"icon_hq"`
 		ID            int    `json:"id"`
 		Item          struct {
-			AttributesBase struct {
-				AutoAttack      int `json:"auto_attack"`
-				AutoAttackHq    int `json:"auto_attack_hq"`
-				BlockRate       int `json:"block_rate"`
-				BlockRateHq     int `json:"block_rate_hq"`
-				BlockStrength   int `json:"block_strength"`
-				BlockStrengthHq int `json:"block_strength_hq"`
-				Damage          int `json:"damage"`
-				DamageHq        int `json:"damage_hq"`
-				Defense         int `json:"defense"`
-				DefenseHq       int `json:"defense_hq"`
-				Delay           int `json:"delay"`
-				DelayHq         int `json:"delay_hq"`
-				Dps             int `json:"dps"`
-				DpsHq           int `json:"dps_hq"`
-				ID              int `json:"id"`
-				MagicDamage     int `json:"magic_damage"`
-				MagicDamageHq   int `json:"magic_damage_hq"`
-				MagicDefense    int `json:"magic_defense"`
-				MagicDefenseHq  int `json:"magic_defense_hq"`
-				Patch           int `json:"patch"`
-			} `json:"attributes_base"`
+			// AttributesBase struct {
+			// 	AutoAttack      int `json:"auto_attack"`
+			// 	AutoAttackHq    int `json:"auto_attack_hq"`
+			// 	BlockRate       int `json:"block_rate"`
+			// 	BlockRateHq     int `json:"block_rate_hq"`
+			// 	BlockStrength   int `json:"block_strength"`
+			// 	BlockStrengthHq int `json:"block_strength_hq"`
+			// 	Damage          int `json:"damage"`
+			// 	DamageHq        int `json:"damage_hq"`
+			// 	Defense         int `json:"defense"`
+			// 	DefenseHq       int `json:"defense_hq"`
+			// 	Delay           int `json:"delay"`
+			// 	DelayHq         int `json:"delay_hq"`
+			// 	Dps             int `json:"dps"`
+			// 	DpsHq           int `json:"dps_hq"`
+			// 	ID              int `json:"id"`
+			// 	MagicDamage     int `json:"magic_damage"`
+			// 	MagicDamageHq   int `json:"magic_damage_hq"`
+			// 	MagicDefense    int `json:"magic_defense"`
+			// 	MagicDefenseHq  int `json:"magic_defense_hq"`
+			// 	Patch           int `json:"patch"`
+			// } `json:"attributes_base"`
 			AttributesParams           []interface{} `json:"attributes_params"`
 			AttributesParamsSpecial    []interface{} `json:"attributes_params_special"`
 			BonusName                  interface{}   `json:"bonus_name"`
@@ -254,12 +254,12 @@ type XIVDBItem struct {
 			LodestoneID                string        `json:"lodestone_id"`
 			LodestoneType              string        `json:"lodestone_type"`
 			Name                       string        `json:"name"`
-			Patch                      struct {
-				Name   string `json:"name"`
-				Number string `json:"number"`
-				Patch  int    `json:"patch"`
-				URL    string `json:"url"`
-			} `json:"patch"`
+			// Patch                      struct {
+			// 	Name   string `json:"name"`
+			// 	Number string `json:"number"`
+			// 	Patch  int    `json:"patch"`
+			// 	URL    string `json:"url"`
+			// } `json:"patch"`
 			PriceMid     int         `json:"price_mid"`
 			Rarity       int         `json:"rarity"`
 			SeriesName   interface{} `json:"series_name"`
@@ -287,37 +287,37 @@ type XIVDBItem struct {
 		LodestoneID       string `json:"lodestone_id"`
 		LodestoneType     string `json:"lodestone_type"`
 		Name              string `json:"name"`
-		Patch             struct {
-			Name   string `json:"name"`
-			Number string `json:"number"`
-			Patch  int    `json:"patch"`
-			URL    string `json:"url"`
-		} `json:"patch"`
+		// Patch             struct {
+		// 	Name   string `json:"name"`
+		// 	Number string `json:"number"`
+		// 	Patch  int    `json:"patch"`
+		// 	URL    string `json:"url"`
+		// } `json:"patch"`
 		Stars     int    `json:"stars"`
 		StarsHTML string `json:"stars_html"`
 		Tree      []struct {
-			AttributesBase struct {
-				AutoAttack      int `json:"auto_attack"`
-				AutoAttackHq    int `json:"auto_attack_hq"`
-				BlockRate       int `json:"block_rate"`
-				BlockRateHq     int `json:"block_rate_hq"`
-				BlockStrength   int `json:"block_strength"`
-				BlockStrengthHq int `json:"block_strength_hq"`
-				Damage          int `json:"damage"`
-				DamageHq        int `json:"damage_hq"`
-				Defense         int `json:"defense"`
-				DefenseHq       int `json:"defense_hq"`
-				Delay           int `json:"delay"`
-				DelayHq         int `json:"delay_hq"`
-				Dps             int `json:"dps"`
-				DpsHq           int `json:"dps_hq"`
-				ID              int `json:"id"`
-				MagicDamage     int `json:"magic_damage"`
-				MagicDamageHq   int `json:"magic_damage_hq"`
-				MagicDefense    int `json:"magic_defense"`
-				MagicDefenseHq  int `json:"magic_defense_hq"`
-				Patch           int `json:"patch"`
-			} `json:"attributes_base"`
+			// AttributesBase struct {
+			// 	AutoAttack      int `json:"auto_attack"`
+			// 	AutoAttackHq    int `json:"auto_attack_hq"`
+			// 	BlockRate       int `json:"block_rate"`
+			// 	BlockRateHq     int `json:"block_rate_hq"`
+			// 	BlockStrength   int `json:"block_strength"`
+			// 	BlockStrengthHq int `json:"block_strength_hq"`
+			// 	Damage          int `json:"damage"`
+			// 	DamageHq        int `json:"damage_hq"`
+			// 	Defense         int `json:"defense"`
+			// 	DefenseHq       int `json:"defense_hq"`
+			// 	Delay           int `json:"delay"`
+			// 	DelayHq         int `json:"delay_hq"`
+			// 	Dps             int `json:"dps"`
+			// 	DpsHq           int `json:"dps_hq"`
+			// 	ID              int `json:"id"`
+			// 	MagicDamage     int `json:"magic_damage"`
+			// 	MagicDamageHq   int `json:"magic_damage_hq"`
+			// 	MagicDefense    int `json:"magic_defense"`
+			// 	MagicDefenseHq  int `json:"magic_defense_hq"`
+			// 	Patch           int `json:"patch"`
+			// } `json:"attributes_base"`
 			AttributesParams           []interface{} `json:"attributes_params"`
 			AttributesParamsSpecial    []interface{} `json:"attributes_params_special"`
 			BonusName                  interface{}   `json:"bonus_name"`
@@ -353,12 +353,12 @@ type XIVDBItem struct {
 			LodestoneID                string        `json:"lodestone_id"`
 			LodestoneType              string        `json:"lodestone_type"`
 			Name                       string        `json:"name"`
-			Patch                      struct {
-				Name   string `json:"name"`
-				Number string `json:"number"`
-				Patch  int    `json:"patch"`
-				URL    string `json:"url"`
-			} `json:"patch"`
+			// Patch                      struct {
+			// 	Name   string `json:"name"`
+			// 	Number string `json:"number"`
+			// 	Patch  int    `json:"patch"`
+			// 	URL    string `json:"url"`
+			// } `json:"patch"`
 			PriceMid     int         `json:"price_mid"`
 			Quantity     int         `json:"quantity"`
 			Rarity       int         `json:"rarity"`
@@ -408,28 +408,28 @@ type XIVDBItem struct {
 			CostHq1                   int `json:"cost_hq_1"`
 			CostHq3                   int `json:"cost_hq_3"`
 			CostItem1                 struct {
-				AttributesBase struct {
-					AutoAttack      int `json:"auto_attack"`
-					AutoAttackHq    int `json:"auto_attack_hq"`
-					BlockRate       int `json:"block_rate"`
-					BlockRateHq     int `json:"block_rate_hq"`
-					BlockStrength   int `json:"block_strength"`
-					BlockStrengthHq int `json:"block_strength_hq"`
-					Damage          int `json:"damage"`
-					DamageHq        int `json:"damage_hq"`
-					Defense         int `json:"defense"`
-					DefenseHq       int `json:"defense_hq"`
-					Delay           int `json:"delay"`
-					DelayHq         int `json:"delay_hq"`
-					Dps             int `json:"dps"`
-					DpsHq           int `json:"dps_hq"`
-					ID              int `json:"id"`
-					MagicDamage     int `json:"magic_damage"`
-					MagicDamageHq   int `json:"magic_damage_hq"`
-					MagicDefense    int `json:"magic_defense"`
-					MagicDefenseHq  int `json:"magic_defense_hq"`
-					Patch           int `json:"patch"`
-				} `json:"attributes_base"`
+				// AttributesBase struct {
+				// 	AutoAttack      int `json:"auto_attack"`
+				// 	AutoAttackHq    int `json:"auto_attack_hq"`
+				// 	BlockRate       int `json:"block_rate"`
+				// 	BlockRateHq     int `json:"block_rate_hq"`
+				// 	BlockStrength   int `json:"block_strength"`
+				// 	BlockStrengthHq int `json:"block_strength_hq"`
+				// 	Damage          int `json:"damage"`
+				// 	DamageHq        int `json:"damage_hq"`
+				// 	Defense         int `json:"defense"`
+				// 	DefenseHq       int `json:"defense_hq"`
+				// 	Delay           int `json:"delay"`
+				// 	DelayHq         int `json:"delay_hq"`
+				// 	Dps             int `json:"dps"`
+				// 	DpsHq           int `json:"dps_hq"`
+				// 	ID              int `json:"id"`
+				// 	MagicDamage     int `json:"magic_damage"`
+				// 	MagicDamageHq   int `json:"magic_damage_hq"`
+				// 	MagicDefense    int `json:"magic_defense"`
+				// 	MagicDefenseHq  int `json:"magic_defense_hq"`
+				// 	Patch           int `json:"patch"`
+				// } `json:"attributes_base"`
 				AttributesParams           []interface{} `json:"attributes_params"`
 				AttributesParamsSpecial    []interface{} `json:"attributes_params_special"`
 				BonusName                  interface{}   `json:"bonus_name"`
@@ -465,12 +465,12 @@ type XIVDBItem struct {
 				LodestoneID                string        `json:"lodestone_id"`
 				LodestoneType              string        `json:"lodestone_type"`
 				Name                       string        `json:"name"`
-				Patch                      struct {
-					Name   string `json:"name"`
-					Number string `json:"number"`
-					Patch  int    `json:"patch"`
-					URL    string `json:"url"`
-				} `json:"patch"`
+				// Patch                      struct {
+				// 	Name   string `json:"name"`
+				// 	Number string `json:"number"`
+				// 	Patch  int    `json:"patch"`
+				// 	URL    string `json:"url"`
+				// } `json:"patch"`
 				PriceMid     int         `json:"price_mid"`
 				Rarity       int         `json:"rarity"`
 				SeriesName   interface{} `json:"series_name"`
@@ -495,28 +495,28 @@ type XIVDBItem struct {
 			ReceiveHq1    int         `json:"receive_hq_1"`
 			ReceiveHq2    int         `json:"receive_hq_2"`
 			ReceiveItem1  struct {
-				AttributesBase struct {
-					AutoAttack      int `json:"auto_attack"`
-					AutoAttackHq    int `json:"auto_attack_hq"`
-					BlockRate       int `json:"block_rate"`
-					BlockRateHq     int `json:"block_rate_hq"`
-					BlockStrength   int `json:"block_strength"`
-					BlockStrengthHq int `json:"block_strength_hq"`
-					Damage          int `json:"damage"`
-					DamageHq        int `json:"damage_hq"`
-					Defense         int `json:"defense"`
-					DefenseHq       int `json:"defense_hq"`
-					Delay           int `json:"delay"`
-					DelayHq         int `json:"delay_hq"`
-					Dps             int `json:"dps"`
-					DpsHq           int `json:"dps_hq"`
-					ID              int `json:"id"`
-					MagicDamage     int `json:"magic_damage"`
-					MagicDamageHq   int `json:"magic_damage_hq"`
-					MagicDefense    int `json:"magic_defense"`
-					MagicDefenseHq  int `json:"magic_defense_hq"`
-					Patch           int `json:"patch"`
-				} `json:"attributes_base"`
+				// AttributesBase struct {
+				// 	AutoAttack      int `json:"auto_attack"`
+				// 	AutoAttackHq    int `json:"auto_attack_hq"`
+				// 	BlockRate       int `json:"block_rate"`
+				// 	BlockRateHq     int `json:"block_rate_hq"`
+				// 	BlockStrength   int `json:"block_strength"`
+				// 	BlockStrengthHq int `json:"block_strength_hq"`
+				// 	Damage          int `json:"damage"`
+				// 	DamageHq        int `json:"damage_hq"`
+				// 	Defense         int `json:"defense"`
+				// 	DefenseHq       int `json:"defense_hq"`
+				// 	Delay           int `json:"delay"`
+				// 	DelayHq         int `json:"delay_hq"`
+				// 	Dps             int `json:"dps"`
+				// 	DpsHq           int `json:"dps_hq"`
+				// 	ID              int `json:"id"`
+				// 	MagicDamage     int `json:"magic_damage"`
+				// 	MagicDamageHq   int `json:"magic_damage_hq"`
+				// 	MagicDefense    int `json:"magic_defense"`
+				// 	MagicDefenseHq  int `json:"magic_defense_hq"`
+				// 	Patch           int `json:"patch"`
+				// } `json:"attributes_base"`
 				AttributesParams           []interface{} `json:"attributes_params"`
 				AttributesParamsSpecial    []interface{} `json:"attributes_params_special"`
 				BonusName                  interface{}   `json:"bonus_name"`
@@ -552,12 +552,12 @@ type XIVDBItem struct {
 				LodestoneID                string        `json:"lodestone_id"`
 				LodestoneType              string        `json:"lodestone_type"`
 				Name                       string        `json:"name"`
-				Patch                      struct {
-					Name   string `json:"name"`
-					Number string `json:"number"`
-					Patch  int    `json:"patch"`
-					URL    string `json:"url"`
-				} `json:"patch"`
+				// Patch                      struct {
+				// 	Name   string `json:"name"`
+				// 	Number string `json:"number"`
+				// 	Patch  int    `json:"patch"`
+				// 	URL    string `json:"url"`
+				// } `json:"patch"`
 				PriceMid     int         `json:"price_mid"`
 				Rarity       int         `json:"rarity"`
 				SeriesName   interface{} `json:"series_name"`
